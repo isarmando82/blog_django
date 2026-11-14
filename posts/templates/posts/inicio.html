@@ -9,9 +9,25 @@
         Un espacio para compartir lo que voy aprendiendo sobre Python, Django y automatización.
     </p>
     <p>
-        Este proyecto nació como un blog por consola escrito en Python y ahora se está
-        transformando en un sitio web con Django. En esta etapa el sitio ya tiene rutas,
-        vistas, templates con herencia y estilos propios.
+        Este proyecto nació como un blog por consola escrito en Python y ahora es un sitio
+        web con Django. Las publicaciones se guardan en una base de datos y se administran
+        desde el panel de Django.
     </p>
+</section>
+
+<section>
+    <h2>Últimas publicaciones</h2>
+
+    {% for post in posts %}
+        <article class="tarjeta">
+            <h2>{{ post.titulo }}</h2>
+            <p class="datos">Por {{ post.autor }} · {{ post.fecha_creacion|date:"d/m/Y" }}</p>
+            <p>{{ post.contenido|truncatewords:30 }}</p>
+        </article>
+    {% empty %}
+        <p>Todavía no hay publicaciones.</p>
+    {% endfor %}
+
+    <p><a href="{% url 'lista_posts' %}">Ver todas las publicaciones</a></p>
 </section>
 {% endblock %}

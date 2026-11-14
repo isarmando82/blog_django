@@ -2,7 +2,7 @@
 
 Proyecto base de un blog web desarrollado con Django.
 
-Pre-entregas 7 y 8 — Curso de Python, Coderhouse
+Pre-entregas 7, 8 y 9 — Curso de Python, Coderhouse
 
 Autor: Armando Ismael
 
@@ -68,6 +68,30 @@ Instalar las dependencias:
 pip install -r requirements.txt
 ```
 
+## Crear la base de datos
+
+La base de datos local (`db.sqlite3`) no se sube al repositorio. Se crea aplicando las migraciones:
+
+```bash
+python manage.py migrate
+```
+
+## Panel de administración
+
+Crear un superusuario (pide nombre de usuario, email y contraseña):
+
+```bash
+python manage.py createsuperuser
+```
+
+Levantar el servidor y entrar a:
+
+```
+http://127.0.0.1:8000/admin/
+```
+
+Ingresar con el superusuario. En la sección **Posts** se pueden crear, editar y borrar publicaciones. El listado muestra las columnas título, autor, estado y fecha de creación, con un filtro por estado y un buscador.
+
 ## Ejecutar el servidor
 
 ```bash
@@ -86,9 +110,10 @@ Para detener el servidor, presionar `Ctrl + C`.
 
 | Ruta | Página | View | Template |
 |---|---|---|---|
-| `/` | Inicio: título, bienvenida y descripción del proyecto | `inicio` | `posts/inicio.html` |
+| `/` | Inicio: título, bienvenida, descripción y los últimos 3 posts publicados | `inicio` | `posts/inicio.html` |
 | `/acerca/` | Acerca de: reseña del autor y propósito del sitio | `acerca` | `posts/acerca.html` |
-| `/posts/` | Lista de publicaciones de ejemplo | `lista_posts` | `posts/lista_posts.html` |
+| `/posts/` | Lista de los posts publicados, cargados desde la base de datos | `lista_posts` | `posts/lista_posts.html` |
+| `/admin/` | Panel de administración de Django | — | — |
 
 El menú de navegación está en `base.html` y permite moverse entre las páginas.
 
@@ -119,7 +144,8 @@ blog_django/
     ├── admin.py
     ├── apps.py
     ├── migrations/
-    │   └── __init__.py
+    │   ├── __init__.py
+    │   └── 0001_initial.py
     ├── models.py
     ├── tests.py
     ├── urls.py
@@ -135,6 +161,28 @@ blog_django/
             └── css/
                 └── estilos.css
 ```
+
+## Modelo Post
+
+Definido en `posts/models.py`:
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `titulo` | `CharField` | Título del post. |
+| `contenido` | `TextField` | Texto de la publicación. |
+| `autor` | `CharField` | Nombre de quien escribe. |
+| `fecha_creacion` | `DateTimeField(auto_now_add=True)` | Se completa sola al crear el post. |
+| `estado` | `CharField` con `choices` | `borrador`, `publicado` o `archivado`. |
+
+El método `__str__` devuelve el título, así cada post se ve por su nombre en el admin.
+
+La view `lista_posts` consulta con el ORM solo los posts publicados, del más nuevo al más viejo:
+
+```python
+Post.objects.filter(estado="publicado").order_by("-fecha_creacion")
+```
+
+y el template `lista_posts.html` los recorre con `{% for post in posts %}`. Los borradores y los archivados no se muestran en el sitio.
 
 ## Aplicaciones
 

@@ -81,3 +81,10 @@ h2 {
     color: #636e72;
     font-size: 14px;
 }
+
+/* --- Datos de cada post (autor, fecha, estado) --- */
+.datos {
+    color: #636e72;
+    font-size: 14px;
+    margin: 0 0 8px;
+}
