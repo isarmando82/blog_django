@@ -1,0 +1,25 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Posts | Blog Django{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Publicaciones</h1>
+    <p>Lista de ejemplo. Más adelante los posts se van a cargar desde la base de datos.</p>
+
+    <article class="tarjeta">
+        <h2>Primeros pasos con Python</h2>
+        <p>Cómo instalar Python, usar la terminal y ejecutar tu primer script.</p>
+    </article>
+
+    <article class="tarjeta">
+        <h2>Qué es Django</h2>
+        <p>Django es un framework web creado con Python.</p>
+    </article>
+
+    <article class="tarjeta">
+        <h2>Organizando datos con listas</h2>
+        <p>Las listas permiten guardar varios elementos en una sola variable.</p>
+    </article>
+</section>
+{% endblock %}

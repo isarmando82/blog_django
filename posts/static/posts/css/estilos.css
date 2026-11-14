@@ -1,0 +1,83 @@
+/* Estilos del Blog Django */
+
+/* --- General --- */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #2d3436;
+    line-height: 1.6;
+}
+
+/* --- Encabezado y menu de navegacion --- */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background-color: #1e3a5f;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.menu a {
+    color: #dfe6e9;
+    margin-left: 24px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.menu a:hover {
+    color: #ffb347;
+}
+
+/* --- Contenido --- */
+.contenido {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 32px 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    color: #1e3a5f;
+    margin-top: 0;
+}
+
+h2 {
+    color: #2c5282;
+    margin-top: 28px;
+}
+
+.destacado {
+    font-size: 18px;
+    color: #c0392b;
+}
+
+/* --- Tarjetas de posts --- */
+.tarjeta {
+    border-left: 4px solid #ffb347;
+    padding: 4px 16px;
+    margin: 16px 0;
+    background-color: #fafafa;
+}
+
+.tarjeta h2 {
+    margin: 8px 0 4px;
+    font-size: 20px;
+}
+
+/* --- Pie de pagina --- */
+.pie {
+    text-align: center;
+    padding: 20px;
+    color: #636e72;
+    font-size: 14px;
+}

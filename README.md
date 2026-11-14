@@ -2,7 +2,7 @@
 
 Proyecto base de un blog web desarrollado con Django.
 
-Pre-entrega 7 — Curso de Python, Coderhouse
+Pre-entregas 7 y 8 — Curso de Python, Coderhouse
 
 Autor: Armando Ismael
 
@@ -80,7 +80,25 @@ Abrir en el navegador:
 http://127.0.0.1:8000/
 ```
 
-Se tiene que ver la pantalla inicial de Django. Para detener el servidor, presionar `Ctrl + C`.
+Para detener el servidor, presionar `Ctrl + C`.
+
+## Páginas del sitio
+
+| Ruta | Página | View | Template |
+|---|---|---|---|
+| `/` | Inicio: título, bienvenida y descripción del proyecto | `inicio` | `posts/inicio.html` |
+| `/acerca/` | Acerca de: reseña del autor y propósito del sitio | `acerca` | `posts/acerca.html` |
+| `/posts/` | Lista de publicaciones de ejemplo | `lista_posts` | `posts/lista_posts.html` |
+
+El menú de navegación está en `base.html` y permite moverse entre las páginas.
+
+## Cómo funciona: ruta → vista → template → estático
+
+1. `blog_project/urls.py` conecta las rutas de la app con `include("posts.urls")`.
+2. `posts/urls.py` define un `path()` para cada página.
+3. `posts/views.py` tiene una función por página, que devuelve su template con `render()`.
+4. Los templates hijos (`inicio.html`, `acerca.html`, `lista_posts.html`) usan `{% extends 'posts/base.html' %}` y completan el `{% block content %}`.
+5. `base.html` usa `{% load static %}` y enlaza el CSS con `{% static 'posts/css/estilos.css' %}`.
 
 ## Estructura del proyecto
 
@@ -104,12 +122,23 @@ blog_django/
     │   └── __init__.py
     ├── models.py
     ├── tests.py
-    └── views.py
+    ├── urls.py
+    ├── views.py
+    ├── templates/
+    │   └── posts/
+    │       ├── base.html
+    │       ├── inicio.html
+    │       ├── lista_posts.html
+    │       └── acerca.html
+    └── static/
+        └── posts/
+            └── css/
+                └── estilos.css
 ```
 
 ## Aplicaciones
 
-- `posts`: aplicación inicial para manejar las publicaciones del blog.
+- `posts`: aplicación principal del blog. Contiene las views, las rutas, los templates y los archivos estáticos del sitio.
 
 ## Archivos ignorados
 
