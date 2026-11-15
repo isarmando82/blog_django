@@ -5,17 +5,26 @@
 {% block content %}
 <section>
     <h1>Publicaciones</h1>
+    <p><a href="{% url 'crear_post' %}">+ Nuevo post</a></p>
 
     {% for post in posts %}
-        <article class="tarjeta">
-            <h2>{{ post.titulo }}</h2>
-            <p class="datos">
-                Por {{ post.autor }} · {{ post.fecha_creacion|date:"d/m/Y H:i" }} · {{ post.get_estado_display }}
-            </p>
-            <p>{{ post.contenido|linebreaksbr }}</p>
-        </article>
+    <article class="tarjeta">
+        {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" style="max-width: 300px;">
+        {% endif %}
+        <h2><a href="{% url 'detalle_post' post.pk %}">{{ post.titulo }}</a></h2>
+        <p class="datos">
+            Por {{ post.autor }} · {{ post.fecha_creacion|date:"d/m/Y H:i" }} · {{ post.get_estado_display }}
+        </p>
+        <p>{{ post.contenido|linebreaksbr|truncatewords:30 }}</p>
+        <p>
+            <a href="{% url 'detalle_post' post.pk %}">Ver</a> ·
+            <a href="{% url 'editar_post' post.pk %}">Editar</a> ·
+            <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>
+        </p>
+    </article>
     {% empty %}
-        <p>Todavía no hay publicaciones. Cargalas desde el panel <a href="/admin/">/admin/</a>.</p>
+    <p>Todavía no hay publicaciones. <a href="{% url 'crear_post' %}">Creá la primera</a>.</p>
     {% endfor %}
 </section>
 {% endblock %}
