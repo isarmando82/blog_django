@@ -1,7 +1,7 @@
 # Blog Django
 
 Proyecto de un blog web desarrollado con Django.
-Pre-entregas 7, 8, 9 y 10 — Curso de Python, Coderhouse
+Pre-entregas 7, 8, 9, 10 y 11 — Curso de Python, Coderhouse
 Autor: Armando Ismael
 
 ## Descripción
@@ -218,3 +218,15 @@ La página de inicio muestra solo los últimos 3 posts publicados. El listado `/
 ## Archivos ignorados
 
 El archivo `.gitignore` evita subir al repositorio el entorno virtual (`venv/`), los archivos temporales de Python (`__pycache__/`, `*.pyc`), las variables privadas (`.env`) y la base de datos local (`db.sqlite3`).
+
+## Pre-entrega 11: Autenticación y perfiles
+
+- App accounts: registro, login y logout de usuarios.
+- Perfil de usuario con avatar, biografía, Editar perfil y Cambiar contraseña.
+- Crear, editar y borrar posts requiere iniciar sesión (@login_required): sin sesión redirige al login.
+- Menú en base.html que cambia según si hay sesión iniciada.
+
+### Cómo probar
+1. python manage.py migrate
+2. python manage.py runserver
+3. Registrarse en /accounts/registro/ e iniciar sesión.

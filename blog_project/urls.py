@@ -10,6 +10,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Rutas de la app posts
     path("", include("posts.urls")),
+    # Rutas de la app accounts
+    path("cuentas/", include("accounts.urls")),
 ]
 
 # Servir archivos media (imagenes subidas) durante el desarrollo
